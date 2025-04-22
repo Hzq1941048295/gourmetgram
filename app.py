@@ -54,6 +54,7 @@ def upload():
 def test():
     preds, probs = model_predict("./instance/uploads/test_image.jpeg", model)
     return str(preds)
-
+prediction_id = str(uuid.uuid4())
+executor.submit(upload_production_bucket, img_path, preds, probs, prediction_id)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=False)
